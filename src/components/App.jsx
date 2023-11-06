@@ -1,10 +1,7 @@
 
 import { Component } from 'react';
 import {
-  ContainerDivPhonebook,
-  TitlePhonebook
- 
-} from './FormContacts/FormContacts.styled';
+  ContainerDivPhonebook,TitlePhonebook } from './FormContacts/FormContacts.styled';
 import { nanoid } from 'nanoid';
 
 import { FormContacts } from './FormContacts/FormContacts';
@@ -32,6 +29,8 @@ createUser = (data) => {
     }
     )
   };
+
+
   render() {
     const {  contacts } = this.state;
     return (
