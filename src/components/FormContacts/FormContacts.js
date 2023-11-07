@@ -7,11 +7,16 @@ export class FormContacts extends Component {
       number: '',
     };
   
+
     handleChange = (evt) => {
-      this.setState({
-        [evt.target.name]: evt.target.value,
-      });
+      if (evt.target.name === 'number') {
+        const number = evt.target.value.replace(/[^\d-]/g, '');
+        this.setState({ [evt.target.name]: number });
+      } else {
+        this.setState({ [evt.target.name]: evt.target.value });
+      }
     };
+
   
     handleSubmit = (evt) => {
       evt.preventDefault();
