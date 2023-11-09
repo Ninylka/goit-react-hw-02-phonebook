@@ -1,5 +1,6 @@
 
 import { Component } from 'react';
+import { nanoid } from 'nanoid';
 import { FormPhonebook,ButtonPhonebook,LabelPhonebook,InputPhonebookName,InputPhonebookNumber } from './FormContacts.styled';
 export class FormContacts extends Component {
     state = {
@@ -17,13 +18,14 @@ export class FormContacts extends Component {
       }
     };
 
-  
+    
     handleSubmit = (evt) => {
       evt.preventDefault();
       const { name, number } = this.state;
       const contact = {
         name,
         number,
+id: nanoid()
       };
       this.props.onSubmit(contact);
       this.setState({
@@ -31,7 +33,8 @@ export class FormContacts extends Component {
         number: '',
       });
     };
-    
+
+
     render() {
       const { name, number } = this.state;
       return (

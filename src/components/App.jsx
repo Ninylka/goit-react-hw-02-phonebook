@@ -1,8 +1,6 @@
 
 import { Component } from 'react';
 import { ContainerDivPhonebook,TitlePhonebook, TitleContacts } from './FormContacts/FormContacts.styled';
-import { nanoid } from 'nanoid';
-
 import { FormContacts } from './FormContacts/FormContacts';
 import { ListContacts } from './ListContacts/ListContacts';
 import { Filter } from './Filter/Filter';
@@ -19,16 +17,6 @@ export class App extends Component {
 
   };
   
-
- 
-  handleSubmit = (evt) => {
-    evt.preventDefault();
-    this.createUser( {
-        id: nanoid(),
-      name: this.state.name,
-    }
-    )
-  };
 
   changeFilter = e => {
     this.setState({ filter: e.currentTarget.value });
@@ -49,7 +37,6 @@ export class App extends Component {
     
     this.setState((prevState) => ({
       contacts: [...prevState.contacts, data],
-      name: '', 
     }));
   };
 
@@ -58,9 +45,12 @@ export class App extends Component {
       return { contacts: prevState.contacts.filter(contact => contact.id !== contactId)}
     })
   }
-
+ 
   render() {
     const {  filter, contacts } = this.state;
+    const filteredContacts = contacts.filter((contact) =>
+    contact.name.toLowerCase().includes(filter.toLowerCase())
+  );
     return (
       <ContainerDivPhonebook>
         <TitlePhonebook>Phonebook</TitlePhonebook>
@@ -68,7 +58,7 @@ export class App extends Component {
         </FormContacts>
         <TitleContacts>Contacts</TitleContacts> 
         <Filter value={filter} onFind={this.changeFilter}/>
-        <ListContacts  contacts={contacts} filter={filter} onDelete={this.deleteContact}>
+        <ListContacts  contacts={filteredContacts} filter={filter} onDelete={this.deleteContact}>
         </ListContacts>
       </ContainerDivPhonebook>
     );
